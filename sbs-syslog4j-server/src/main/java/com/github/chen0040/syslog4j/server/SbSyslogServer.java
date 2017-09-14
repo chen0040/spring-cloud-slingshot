@@ -3,7 +3,7 @@ package com.github.chen0040.syslog4j.server;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.github.chen0040.commons.messages.ClefSyslogMessage;
+import com.github.chen0040.commons.messages.SbSyslogMessage;
 import org.productivity.java.syslog4j.server.SyslogServer;
 import org.productivity.java.syslog4j.server.SyslogServerConfigIF;
 import org.productivity.java.syslog4j.server.SyslogServerEventHandlerIF;
@@ -81,7 +81,7 @@ public class SbSyslogServer {
 
       for(String name : eventHandlerIF.getLoggerNames()) {
          get("/html/" + name, (request, response) -> {
-            List<ClefSyslogMessage> messages = eventHandlerIF.getSnapshots(name);
+            List<SbSyslogMessage> messages = eventHandlerIF.getSnapshots(name);
             StringBuilder sb = new StringBuilder();
             sb.append("<a href=\"/\">HOME</a>");
             for(String loggerName : eventHandlerIF.getLoggerNames()){
@@ -92,7 +92,7 @@ public class SbSyslogServer {
             sb.append("<table style=\"width:100%\">");
             sb.append("<tr><td>Time</td><td>Hostname</td><td>ip</td><td>process</td><td>logLevel</td><td>message</td>");
             for(int i=0; i < messages.size(); ++i) {
-               ClefSyslogMessage message =messages.get(i);
+               SbSyslogMessage message =messages.get(i);
                sb.append("<tr>");
                sb.append("<td>").append(eventHandlerIF.formatDate(message.getDate())).append("</td>");
                sb.append("<td>").append(message.getHostName()).append("</td>");

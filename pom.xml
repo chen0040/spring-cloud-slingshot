@@ -13,7 +13,7 @@
     <licenses>
         <license>
             <name>MIT</name>
-            <url>https://github.com/chen0040/spring-cloud-demo/LICENSE</url>
+            <url>https://github.com/chen0040/spring-cloud-slingshot/LICENSE</url>
             <comments>MIT License</comments>
         </license>
     </licenses>
@@ -28,20 +28,20 @@
     </developers>
 
     <scm>
-        <url>https://github.com/chen0040/spring-cloud-demo</url>
-        <connection>scm:git:git://github.com/chen0040/spring-cloud-demo.git</connection>
-        <developerConnection>scm:git:git@github.com:chen0040/spring-cloud-demo.git</developerConnection>
+        <url>https://github.com/chen0040/spring-cloud-slingshot</url>
+        <connection>scm:git:git://github.com/chen0040/spring-cloud-slingshot.git</connection>
+        <developerConnection>scm:git:git@github.com:chen0040/spring-cloud-slingshot.git</developerConnection>
     </scm>
 
     <issueManagement>
-        <url>https://github.com/chen0040/spring-cloud-demo/issues</url>
+        <url>https://github.com/chen0040/spring-cloud-slingshot/issues</url>
         <system>GitHub Issues</system>
     </issueManagement>
 
 
-    <name>Spring Cloud Demo</name>
-    <description>Demonstrate on how to do spring cloud with several Vagrant VMs</description>
-    <url>https://github.com/chen0040/spring-cloud-demo</url>
+    <name>Spring Cloud Slingshot</name>
+    <description>Slingshot project for spring cloud</description>
+    <url>https://github.com/chen0040/spring-cloud-slingshot</url>
 
     <distributionManagement>
         <snapshotRepository>
@@ -64,7 +64,24 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+
+        <repository>
+            <id>spring-release</id>
+            <url>http://repo.spring.io/libs-release</url>
+            <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestone</id>
+            <url>http://repo.spring.io/libs-milestone</url>
+            <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+        <repository>
+            <id>spring-snapshot</id>
+            <url>http://repo.spring.io/libs-snapshot</url>
+            <snapshots><enabled>true</enabled></snapshots>
+        </repository>
     </repositories>
+
 
     <pluginRepositories>
         <pluginRepository>
@@ -78,6 +95,11 @@
             <releases>
                 <updatePolicy>never</updatePolicy>
             </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-release</id>
+            <url>http://repo.spring.io/libs-release</url>
+            <snapshots><enabled>false</enabled></snapshots>
         </pluginRepository>
     </pluginRepositories>
 
@@ -105,6 +127,7 @@
         <commons-math.version>3.2</commons-math.version>
 
         <lombok.version>1.16.6</lombok.version>
+        <jackson.version>2.6.0</jackson.version>
     </properties>
 
     <profiles>
@@ -521,5 +544,6 @@
         <module>sbs-syslog4j-server</module>
         <module>sbs-common</module>
         <module>sbs-eureka-app</module>
+        <module>sbs-eureka-web</module>
     </modules>
 </project>

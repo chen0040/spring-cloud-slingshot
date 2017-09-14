@@ -1,7 +1,7 @@
 package com.github.chen0040.syslog4j.server;
 
 
-import com.github.chen0040.commons.messages.ClefSyslogMessage;
+import com.github.chen0040.commons.messages.SbSyslogMessage;
 import com.github.chen0040.commons.utils.StringUtils;
 import org.productivity.java.syslog4j.server.SyslogServerEventHandlerIF;
 import org.productivity.java.syslog4j.server.SyslogServerEventIF;
@@ -28,7 +28,7 @@ public class SbSyslogMessageHandler implements SyslogServerEventHandlerIF {
    private final Map<String, Logger> loggers = new HashMap<>();
    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-   private final Map<String, Queue<ClefSyslogMessage>> snapshots = new HashMap<>();
+   private final Map<String, Queue<SbSyslogMessage>> snapshots = new HashMap<>();
 
    public List<String> getLoggerNames() {
       return loggers.keySet().stream().collect(Collectors.toList());
@@ -46,7 +46,7 @@ public class SbSyslogMessageHandler implements SyslogServerEventHandlerIF {
 
    @Override public void event(SyslogServerIF syslogServer, SyslogServerEventIF event) {
 
-      ClefSyslogMessage message = new ClefSyslogMessage();
+      SbSyslogMessage message = new SbSyslogMessage();
       message.setDate(event.getDate());
       message.setFacility(event.getFacility());
       message.setLevel(event.getLevel());
@@ -88,7 +88,7 @@ public class SbSyslogMessageHandler implements SyslogServerEventHandlerIF {
       if(!StringUtils.isEmpty(process)){
          if(loggers.containsKey(process)){
             message.setMessageId(UUID.randomUUID().toString());
-            Queue<ClefSyslogMessage> queue = snapshots.get(process);
+            Queue<SbSyslogMessage> queue = snapshots.get(process);
             queue.add(message);
             if(queue.size() > 500) {
                queue.remove();
@@ -111,7 +111,7 @@ public class SbSyslogMessageHandler implements SyslogServerEventHandlerIF {
    }
 
 
-   public List<ClefSyslogMessage> getSnapshots(String name) {
+   public List<SbSyslogMessage> getSnapshots(String name) {
       if(snapshots.containsKey(name)){
          return snapshots.get(name).stream().collect(Collectors.toList());
       } else {

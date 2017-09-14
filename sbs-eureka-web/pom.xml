@@ -9,11 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sbs-eureka-app</artifactId>
+    <artifactId>sbs-eureka-web</artifactId>
 
     <packaging>jar</packaging>
 
     <properties>
+
         <!-- maven -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -21,17 +22,18 @@
         <java.version>1.8</java.version>
         <findbugs.version>3.0.2</findbugs.version>
 
-        <!-- utility -->
-        <lombok.version>1.16.6</lombok.version>
-        <spring-boot-maven-plugin.version>1.4.1.RELEASE</spring-boot-maven-plugin.version>
-        <surefire.version>2.19</surefire.version>
-
         <!-- cloud -->
+        <start-class>com.github.chen0040.eureka.web.WebApplication</start-class>
         <spring-cloud.version>Brixton.SR5</spring-cloud.version>
 
-        <elasticsearch.version>5.3.2</elasticsearch.version>
-    </properties>
+        <!-- unit testing -->
+        <surefire.version>2.19</surefire.version>
 
+        <!-- utility -->
+        <fastjson.version>1.2.24</fastjson.version>
+
+        <spring-boot-maven-plugin.version>1.4.1.RELEASE</spring-boot-maven-plugin.version>
+    </properties>
 
     <profiles>
 
@@ -103,6 +105,7 @@
                         </configuration>
                     </plugin>
 
+
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>findbugs-maven-plugin</artifactId>
@@ -123,7 +126,6 @@
                             </execution>
                         </executions>
                     </plugin>
-
 
 
 
@@ -194,9 +196,6 @@
         </dependencies>
     </dependencyManagement>
 
-
-
-
     <dependencies>
 
         <!-- utility libraries -->
@@ -213,16 +212,85 @@
             <version>1</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
         <!-- spring web dependencies -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+
+        <!-- database dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.21</version>
         </dependency>
 
         <dependency>
@@ -235,17 +303,38 @@
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
 
-        <!-- cloud dependencies -->
+        <!-- spring cloud dependencies -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
+        </dependency>
+
+        <!-- WebSocket -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+        </dependency>
+
 
         <!-- logging -->
         <dependency>
@@ -255,28 +344,39 @@
         </dependency>
 
         <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>2.7.8</version>
+        </dependency>
+
+        <!-- WebJars -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>sockjs-client</artifactId>
+            <version>0.3.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>stomp-js</artifactId>
+            <version>ca2e094679</version>
+        </dependency>
+
+        <!-- user agent -->
+        <dependency>
+            <groupId>net.sf.uadetector</groupId>
+            <artifactId>uadetector-resources</artifactId>
+            <version>2014.04</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>com.github.chen0040</groupId>
             <artifactId>sbs-common</artifactId>
             <version>1.0.1</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.searchbox/jest -->
-        <dependency>
-            <groupId>io.searchbox</groupId>
-            <artifactId>jest</artifactId>
-            <version>${elasticsearch.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch</artifactId>
-            <version>${elasticsearch.version}</version>
-        </dependency>
-
-
     </dependencies>
-
-
 
     <build>
 
@@ -306,7 +406,22 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <finalName>sbs-eureka-app</finalName>
+                            <finalName>sbs-eureka-web</finalName>
+
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+
+                            <keepDependenciesWithProvidedScope>true</keepDependenciesWithProvidedScope>
+
+
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
@@ -320,17 +435,24 @@
                                         implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                     <resource>META-INF/spring.schemas</resource>
                                 </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>jasperreports_extension.properties</resource>
+                                </transformer>
+                                <!--
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                                -->
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.github.chen0040.eureka.app.SbApplication</mainClass>
+                                    <mainClass>com.github.chen0040.eureka.web.WebApplication</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
+
         </plugins>
     </build>
 </project>

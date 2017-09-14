@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Getter
 @Setter
-public class ClefSyslogMessage implements Serializable {
+public class SbSyslogMessage implements Serializable {
    private static final long serialVersionUID = -8925990229120234613L;
 
    private int facility;

@@ -44,7 +44,7 @@
 
         <syslogConfig class="org.productivity.java.syslog4j.impl.net.udp.UDPNetSyslogConfig">
             <!-- remote system to log to -->
-            <host>dev-server-03</host>
+            <host>dev-server-syslog4j</host>
             <!-- remote port to log to -->
             <port>8089</port>
             <!-- program name to log as -->
@@ -61,7 +61,7 @@
 
         <syslogConfig class="org.productivity.java.syslog4j.impl.net.udp.UDPNetSyslogConfig">
             <!-- remote system to log to -->
-            <host>prod-server-03</host>
+            <host>prod-server-syslog4j</host>
             <!-- remote port to log to -->
             <port>8089</port>
             <!-- program name to log as -->
