@@ -60,7 +60,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <finalName>clef-syslog4j-server</finalName>
+                            <finalName>sbs-syslog4j-server</finalName>
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
