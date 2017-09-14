@@ -545,5 +545,7 @@
         <module>sbs-common</module>
         <module>sbs-eureka-app</module>
         <module>sbs-eureka-web</module>
+        <module>sbs-mariadb-server</module>
+        <module>sbs-redis-server</module>
     </modules>
 </project>
