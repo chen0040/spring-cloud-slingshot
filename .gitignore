@@ -1,6 +1,7 @@
 *.iml
 .idea/
 target/
+bin/*.jar
 
 # Compiled class file
 *.class
@@ -15,7 +16,6 @@ target/
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 *.zip
