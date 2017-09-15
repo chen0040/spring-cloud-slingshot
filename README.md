@@ -11,6 +11,7 @@ The system consists of the following component
 * sbs-eureka-app: this is application server, which can be considered as one of the micro-service which serves as the service prodvider
 * sbs-eureka-web: this is web server, which can consumes service provided by application servers such as sbs-eureka-app
 * sbs-mariadb-server: this is a standalone mariadb server for local development and testing
+* sbs-redis-server: this is a standalone redis server for local development and testing
 
 # sbs-eureka-web
 
