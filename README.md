@@ -10,6 +10,7 @@ The system consists of the following component
 * sbs-syslog4j-server: this is the syslog4j server that servers as the centralized logging system for the micro-services
 * sbs-eureka-app: this is application server, which can be considered as one of the micro-service which serves as the service prodvider
 * sbs-eureka-web: this is web server, which can consumes service provided by application servers such as sbs-eureka-app
+* sbs-mariadb-server: this is a standalone mariadb server for local development and testing
 
 # sbs-eureka-web
 
@@ -28,6 +29,9 @@ To use this project create a database named spring_boot_slingshot in your mysql 
 ```sql
 CREATE DATABASE spring_boot_slingshot CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ```
+
+In case you do not have the mariadb or mysql server installed, locally, you can also run the sbs-mariadb-server which is a standalone mariadb server 
+that can be run at port 3306 locally.
 
 Note that the default username and password for the mysql is configured to 
 

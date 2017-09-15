@@ -19,9 +19,9 @@ import static spark.Spark.port;
 /**
  * Created by xschen on 12/4/2017.
  */
-public class ClefMariaDbServer {
+public class SbMariaDbServer {
 
-   private static final Logger logger = LoggerFactory.getLogger(ClefMariaDbServer.class);
+   private static final Logger logger = LoggerFactory.getLogger(SbMariaDbServer.class);
 
    public static void main(String[] args) throws ManagedProcessException, IOException {
 
