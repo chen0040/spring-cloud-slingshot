@@ -62,8 +62,17 @@ public class SbMariaDbServer {
       port(3088);
 
       get("/kill", (req, res) -> {
-         System.exit(0);
-         return "";
+         new Thread(()->{
+            try {
+               Thread.sleep(100);
+            }
+            catch (InterruptedException e) {
+               e.printStackTrace();
+            }
+            System.exit(0);
+         });
+
+         return "mariadb will be killed in 100 milliseconds";
       });
 
       get("/ping", (req, res) -> "sbs-mariadb-server");
