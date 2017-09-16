@@ -34,7 +34,7 @@ public class VersionServiceImpl implements VersionService {
    @Override
    public boolean isDefaultProfile(){
       String profile = getProfileString();
-      return StringUtils.isEmpty(profile) || profile.contains("docker") || profile.contains("iss") || profile.contains("default") || profile.contains("mysql") || profile.contains("hsql");
+      return StringUtils.isEmpty(profile) || profile.contains("default");
    }
 
 
