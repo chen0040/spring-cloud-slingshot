@@ -16,3 +16,12 @@ Invoke-WebRequest -URI http://localhost:3088/ping
 
 # ping sbs-syslog4j-server
 Invoke-WebRequest -URI http://localhost:8088/ping
+
+$jobs = Get-Job
+
+foreach($job in $jobs){
+    if($job.State -eq "Completed") {
+        Write-Host "Remove Job "$job.Id
+        Remove-Job $job.Id
+    }
+}
