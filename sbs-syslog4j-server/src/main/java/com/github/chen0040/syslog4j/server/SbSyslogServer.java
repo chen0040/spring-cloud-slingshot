@@ -79,6 +79,22 @@ public class SbSyslogServer {
          return html;
       });
 
+      get("/kill", (req, res) -> {
+         new Thread(()->{
+            try {
+               Thread.sleep(100);
+            }
+            catch (InterruptedException e) {
+               e.printStackTrace();
+            }
+            System.exit(0);
+         });
+
+         return "mariadb will be killed in 100 milliseconds";
+      });
+
+      get("/ping", (req, res) -> "sbs-syslog4j-server");
+
       for(String name : eventHandlerIF.getLoggerNames()) {
          get("/html/" + name, (request, response) -> {
             List<SbSyslogMessage> messages = eventHandlerIF.getSnapshots(name);

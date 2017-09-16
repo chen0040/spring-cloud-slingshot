@@ -4,7 +4,7 @@ Spring Cloud Slingshot project that extends from spring-boot-slingshot
 
 # Architecture
 
-The system consists of the following component
+The system consists of the following standalone application servers and web servers:
 
 * sbs-eureka-server: this is the eureka server which serves as the server registry for the micro-services
 * sbs-syslog4j-server: this is the syslog4j server that servers as the centralized logging system for the micro-services
@@ -13,9 +13,43 @@ The system consists of the following component
 * sbs-mariadb-server: this is a standalone mariadb server for local development and testing
 * sbs-redis-server: this is a standalone redis server for local development and testing
 
-# sbs-eureka-web
+Each of these standalone application servers has embedded jetty or tomcat server running inside them, so
+they don't need to have another servlet container to host them.
 
-* Embedded tomcat server
+Among these application servers, the following form the eureka micro-service architecture:
+
+* sbs-eureka-server
+* sbs-eureka-app
+* sbs-eureka-web
+
+# Powershell Support on Running Cluster Locally
+
+To build all the modules into standalone server jars, run the following command in the root directory:
+
+```bash
+./make.ps1
+```
+
+To start locally the cluster of the spring cloud application servers and web servers, run the following command in the root 
+directory:
+
+```bash
+./start-cluster.ps1
+```
+
+To stop the cluster running locally, run the following command in the root directory:
+
+```bash
+./stop-cluster.ps1
+```
+
+Note that the cluster already has a mariadb instance running inside, so you do not need to have another separate mysql or mariadb 
+running locally.
+
+# Note on the web server: sbs-eureka-web
+
+The web server sbs-eureka-web is built from the following components:
+
 * Spring Data JPA and Spring Security for Authentication
 * Spring Data JPA configuration for database
 * Jest for ElasticSearch
@@ -56,4 +90,3 @@ DEMO:
 
 * username: demo
 * password: demo
-
