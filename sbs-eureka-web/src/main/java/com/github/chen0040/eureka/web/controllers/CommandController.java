@@ -1,7 +1,7 @@
 package com.github.chen0040.eureka.web.controllers;
 
 
-import com.github.chen0040.eureka.server.services.VersionService;
+import com.github.chen0040.eureka.web.services.VersionService;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 import org.springframework.beans.factory.annotation.Autowired;
